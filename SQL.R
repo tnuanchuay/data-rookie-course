@@ -13,4 +13,5 @@ SELECT
 FROM
   mtcars 
 GROUP BY cyl
-"; v <- sqldf(query4)
+HAVING cyl > 4
+";  sqldf(query4)
