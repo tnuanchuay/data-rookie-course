@@ -20,18 +20,12 @@ id <- sample(n, size = n*0.75); id[1:10]
 trainData <- BostonHousing[id, ]; head(trainData)
 testData <- BostonHousing[-id, ]; head(testData)
 
-grid <- expand.grid(k = 1:10)
-
-## train model
-ctrl <- trainControl(method = "cv", number = 5, verboseIter = TRUE)
 model <- train(medv ~ .,
-                data = trainData,
-                tuneGrid = grid,
-                tuneLength = 3,
-                method = "knn",
-                trControl = ctrl)
+               data = trainData,
+               method = "lm")
 
-p <- predict(model, newdata = testData); head(p)
+p <- predict(model, newdata = testData)
 
-## root mean squared error
-rmse <- sqrt(mean((p - testData$medv)**2)); rmse
+rmse <- sqrt(mean((p - testData$medv) ** 2)); rmse
+
+model$finalModel
